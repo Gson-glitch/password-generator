@@ -6,6 +6,7 @@ LIGHT_GRAY = '#F5F5F5'
 MEDIUM_FONT_STYLE = ('Arial', 25, 'bold')
 SMALL_FONT_STYLE = ('Times New Roman', 16, 'bold')
 LABEL_COLOR = '#25265E'
+your_password = ""
 
 
 class PasswordGenerator:
@@ -13,7 +14,7 @@ class PasswordGenerator:
         self.window = tk.Tk()
         self.window.geometry('400x100')
         self.window.title('Password Generator')
-        self.window.resizable(0, 0)
+        self.window.resizable(False, False)
 
         self.password_txt = ''
         self.display_frame = self.create_display_frame()
@@ -64,7 +65,11 @@ class PasswordGenerator:
 
     def copy_func(self):
         pyperclip.copy(self.password_txt)
-        print('Hello')
+        global your_password
+        your_password = self.password_txt
+        pyperclip.copy(your_password)
+        self.password_txt = "Copied!"
+        self.update_label()
 
     def update_label(self):
         expression = self.password_txt
@@ -77,3 +82,4 @@ class PasswordGenerator:
 if __name__ == "__main__":
     PG = PasswordGenerator()
     PG.run()
+    
